@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Modelling Integration API
+  description: Swiss Army Knife of Modelling.
+  termsOfService: https://psaas.redapp.org/#terms
+  contact:
+    name: Franco
+    url: https://spyd.com
+    email: spydmobile@gmail.com
+  license:
+    name: Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
+    url: https://creativecommons.org/licenses/by-nd/4.0/legalcode
+  version: 2.0.0
+servers:
+- url: htts://localhost:3200/api/V1
+  description: Dev Server
+- url: https://api.modelling.intellifirenwt.com/v1
+  description: Production server
+paths:
+  /resources:
+    summary: show resources you can create
+    get:
+      description: provides a list of resources
+      operationId: resourcesGET
+      responses:
+        "200":
+          description: Successful read of resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resources'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Resources'
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    Resources:
+      type: array
+      description: Array of Resource Description OBJECTS.
+      items:
+        $ref: '#/components/schemas/Resource'
+    Resource:
+      properties:
+        id:
+          type: integer
+          example: 4
+        name:
+          type: string
+          description: name of the resource type
+          example: Ignition
+        latitude:
+          type: number
+          example: 61.123
+        longitude:
+          type: number
+          example: -111.123
+        startDate:
+          type: string
+          example: '{}'
+      example:
+        latitude: 61.123
+        name: Ignition
+        id: 4
+        startDate: '{}'
+        longitude: -111.123
